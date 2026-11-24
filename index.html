@@ -1,10 +1,214 @@
-<html>
-    <head>
-        <meta charset="UTF-8"> 
-        <title>RandomBox</title>
-    </head>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100d1b">
+  <meta name="description" content="새로운 가수들과 함께 멋진 공연을 선사하는 VRChat 이벤트 그룹입니다.">
+  <title>VR EVENT GROUP</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #100d1b;
+      --panel: rgba(255,255,255,.065);
+      --line: rgba(255,255,255,.13);
+      --muted: #b9b3c8;
+      --accent: #d7a7ff;
+      --accent2: #8de1dc;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #fff;
+      background:
+        radial-gradient(ellipse at 15% 12%, rgba(141,225,220,.17), transparent 35%),
+        radial-gradient(ellipse at 85% 22%, rgba(191,132,255,.20), transparent 38%),
+        linear-gradient(160deg, #100d1b 0%, #171126 52%, #0d1720 100%);
+      font-family: Inter, "Noto Sans KR", "Noto Sans JP", "Noto Sans SC",
+        "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.7;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .13;
+      background-image: radial-gradient(#fff .7px, transparent .7px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+    .wrap { width: min(920px, calc(100% - 40px)); margin: 0 auto; position: relative; }
+    header { padding: 28px 0; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .brand { letter-spacing: .2em; font-size: .78rem; font-weight: 800; color: #e8d9ff; white-space: nowrap; }
+    .language-switcher { display: flex; flex-wrap: wrap; gap: 7px; justify-content: flex-end; }
+    .language-switcher button {
+      color: var(--muted); background: rgba(255,255,255,.045);
+      border: 1px solid var(--line); border-radius: 99px;
+      padding: 7px 12px; font: inherit; font-size: .78rem; cursor: pointer;
+      transition: .2s ease;
+    }
+    .language-switcher button:hover { border-color: var(--accent); color: white; }
+    .language-switcher button[aria-pressed="true"] {
+      color: #171020; background: var(--accent); border-color: var(--accent); font-weight: 800;
+    }
+    main { padding: 72px 0 90px; }
+    .eyebrow { color: var(--accent2); letter-spacing: .28em; text-transform: uppercase; font-size: .72rem; font-weight: 800; }
+    h1 { margin: 16px 0 14px; font-size: clamp(2.7rem, 8vw, 5.6rem); line-height: 1.04; letter-spacing: -.055em; }
+    h1 span { color: var(--accent); }
+    .lead { color: var(--muted); max-width: 620px; font-size: 1.05rem; }
+    .rule { height: 1px; background: linear-gradient(90deg, var(--accent), transparent); margin: 42px 0; opacity: .65; }
+    .section-title { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .section-title h2 { margin: 0; font-size: .85rem; letter-spacing: .2em; text-transform: uppercase; }
+    .section-title::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+    .about-card {
+      padding: 28px 30px; border: 1px solid var(--line); border-radius: 17px;
+      background: var(--panel); backdrop-filter: blur(12px);
+      font-size: 1.08rem; min-height: 135px;
+    }
+    .about-card p { margin: 0; }
+    .contact {
+      margin-top: 25px; padding: 27px 30px;
+      border: 1px solid rgba(215,167,255,.35); border-radius: 18px;
+      background: linear-gradient(115deg, rgba(215,167,255,.13), rgba(141,225,220,.07));
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .contact h2 { margin: 0 0 5px; font-size: 1.15rem; }
+    .contact p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .contact-mark { font-size: 2rem; color: var(--accent); flex: 0 0 auto; }
+    footer { padding: 22px 0 34px; border-top: 1px solid var(--line); color: #898397; font-size: .75rem; display: flex; justify-content: space-between; gap: 12px; }
+    @media (max-width: 650px) {
+      header { align-items: flex-start; flex-direction: column; padding: 22px 0; }
+      .language-switcher { justify-content: flex-start; }
+      main { padding: 48px 0 64px; }
+      .about-card { padding: 23px; }
+      .contact { align-items: flex-start; padding: 23px; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">VR EVENT GROUP</div>
+      <nav class="language-switcher" aria-label="Language selection">
+        <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
+        <button type="button" data-lang="en" aria-pressed="false">English</button>
+        <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+        <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+      </nav>
+    </header>
 
-    <body>
-        <h1>Hello, world! 2</h1>
-    </body>
+    <main>
+      <div class="eyebrow" id="eyebrow">A STAGE FOR NEW VOICES</div>
+      <h1 id="headline">Every time,<br><span>a new voice.</span></h1>
+      <p class="lead" id="lead">새로운 가수들과 함께하는 특별한 무대. 비정기적으로 열리는 공연에서 매번 색다른 목소리와 멋진 순간을 만나보세요.</p>
+
+      <div class="rule"></div>
+
+      <section aria-labelledby="about-title">
+        <div class="section-title"><h2 id="about-title">그룹 소개</h2></div>
+        <div class="about-card">
+          <p id="description">비정기적으로 매번 새로운 가수분들과 멋진 공연을 선사해 드리는 이벤트 그룹입니다․</p>
+        </div>
+
+        <div class="contact">
+          <div>
+            <h2 id="contact-title">출연 및 협업 문의</h2>
+            <p id="contact-text">출연 및 협업 문의는 디스코드 그룹 DM으로ǃ</p>
+          </div>
+          <div class="contact-mark" aria-hidden="true">✦</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>VR EVENT GROUP</span>
+      <span id="footer-text">다음 공연에서 만나요.</span>
+    </footer>
+  </div>
+
+  <script>
+    const translations = {
+      ko: {
+        title: "VR EVENT GROUP",
+        eyebrow: "새로운 목소리를 위한 무대",
+        headline: '매번 새로운,<br><span>새로운 목소리.</span>',
+        lead: "새로운 가수들과 함께하는 특별한 무대. 비정기적으로 열리는 공연에서 매번 색다른 목소리와 멋진 순간을 만나보세요.",
+        section: "그룹 소개",
+        description: "비정기적으로 매번 새로운 가수분들과 멋진 공연을 선사해 드리는 이벤트 그룹입니다․",
+        contactTitle: "출연 및 협업 문의",
+        contactText: "출연 및 협업 문의는 디스코드 그룹 DM으로ǃ",
+        footer: "다음 공연에서 만나요."
+      },
+      en: {
+        title: "VR EVENT GROUP",
+        eyebrow: "A STAGE FOR NEW VOICES",
+        headline: 'Every time,<br><span>a new voice.</span>',
+        lead: "Discover fresh voices and memorable moments at our special performances, held irregularly with new singers each time.",
+        section: "About the Group",
+        description: "We're an event group that irregularly puts on wonderful performances, each time with new singers.",
+        contactTitle: "Performances & Collaborations",
+        contactText: "For performance and collaboration inquiries, please contact us via the Discord group DM!",
+        footer: "See you at the next performance."
+      },
+      ja: {
+        title: "VR EVENT GROUP",
+        eyebrow: "新しい歌声が出会うステージ",
+        headline: '毎回、新しい<br><span>歌声とともに。</span>',
+        lead: "新しい歌手の皆さんとともに、特別なステージをお届けします。不定期開催のイベントで、毎回新しい歌声と素敵なひとときをお楽しみください。",
+        section: "グループ紹介",
+        description: "不定期で、毎回新しい歌手の皆さんとともに素敵なパフォーマンスをお届けするイベントグループです。",
+        contactTitle: "出演・コラボレーションのお問い合わせ",
+        contactText: "出演およびコラボレーションのお問い合わせは、DiscordグループのDMまで！",
+        footer: "次回の公演でお会いしましょう。"
+      },
+      zh: {
+        title: "VR EVENT GROUP",
+        eyebrow: "为全新声音打造的舞台",
+        headline: '每一次，<br><span>都有新声音。</span>',
+        lead: "与全新的歌手相聚于特别的舞台。在不定期举办的演出中，每次都能遇见不同的歌声与精彩瞬间。",
+        section: "团体介绍",
+        description: "我们是一个不定期举办活动的团体，每次都会与全新的歌手一起为大家带来精彩的演出。",
+        contactTitle: "演出及合作咨询",
+        contactText: "如需咨询演出及合作事宜，请通过 Discord 群组私信联系我们！",
+        footer: "期待在下一场演出与您相见。"
+      }
+    };
+
+    const languageNames = { ko: "한국어", en: "English", ja: "日本語", zh: "中文" };
+
+    function setLanguage(lang) {
+      const t = translations[lang] || translations.ko;
+      document.documentElement.lang = lang;
+      document.title = t.title;
+      document.getElementById("eyebrow").textContent = t.eyebrow;
+      document.getElementById("headline").innerHTML = t.headline;
+      document.getElementById("lead").textContent = t.lead;
+      document.getElementById("about-title").textContent = t.section;
+      document.getElementById("description").textContent = t.description;
+      document.getElementById("contact-title").textContent = t.contactTitle;
+      document.getElementById("contact-text").textContent = t.contactText;
+      document.getElementById("footer-text").textContent = t.footer;
+
+      document.querySelectorAll("[data-lang]").forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
+      });
+      try { localStorage.setItem("preferred-language", lang); } catch (_) {}
+    }
+
+    document.querySelectorAll("[data-lang]").forEach(button => {
+      button.addEventListener("click", () => setLanguage(button.dataset.lang));
+    });
+
+    let initialLanguage = "ko";
+    try {
+      const saved = localStorage.getItem("preferred-language");
+      if (saved && translations[saved]) initialLanguage = saved;
+    } catch (_) {}
+    setLanguage(initialLanguage);
+  </script>
+</body>
 </html>
