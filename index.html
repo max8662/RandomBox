@@ -69,6 +69,14 @@
       font-size: 1.08rem; min-height: 135px;
     }
     .about-card p { margin: 0; }
+    .rules-card {
+      margin-top: 25px; padding: 25px 28px;
+      border: 1px solid var(--line); border-radius: 17px;
+      background: var(--panel); backdrop-filter: blur(12px);
+    }
+    .rules-card ul { margin: 0; padding-left: 1.25rem; }
+    .rules-card li { padding: 5px 0 5px 5px; color: #eee9f5; }
+    .rules-card li::marker { color: var(--accent2); }
     .contact {
       margin-top: 25px; padding: 27px 30px;
       border: 1px solid rgba(215,167,255,.35); border-radius: 18px;
@@ -114,6 +122,16 @@
           <p id="description">비정기적으로 매번 새로운 가수분들과 멋진 공연을 선사해 드리는 이벤트 그룹입니다․</p>
         </div>
 
+        <div class="section-title" style="margin-top: 34px;"><h2 id="rules-title">이용 주의 사항</h2></div>
+        <div class="rules-card">
+          <ul id="rules-list">
+            <li>성적인 아바타 및 관련 행위 금지</li>
+            <li>인종차별 및 욕설과 비하발언 금지</li>
+            <li>월드 이벤트 진행 중 이벤트를 방해하는 행위 금지</li>
+            <li>과도한 이펙트와 효과음 사용 금지</li>
+          </ul>
+        </div>
+
         <div class="contact">
           <div>
             <h2 id="contact-title">출연 및 협업 문의</h2>
@@ -139,6 +157,13 @@
         lead: "새로운 가수들과 함께하는 특별한 무대. 비정기적으로 열리는 공연에서 매번 색다른 목소리와 멋진 순간을 만나보세요.",
         section: "그룹 소개",
         description: "비정기적으로 매번 새로운 가수분들과 멋진 공연을 선사해 드리는 이벤트 그룹입니다․",
+        rulesTitle: "이용 주의 사항",
+        rules: [
+          "성적인 아바타 및 관련 행위 금지",
+          "인종차별 및 욕설과 비하발언 금지",
+          "월드 이벤트 진행 중 이벤트를 방해하는 행위 금지",
+          "과도한 이펙트와 효과음 사용 금지"
+        ],
         contactTitle: "출연 및 협업 문의",
         contactText: "출연 및 협업 문의는 디스코드 그룹 DM으로ǃ",
         footer: "다음 공연에서 만나요."
@@ -150,6 +175,13 @@
         lead: "Discover fresh voices and memorable moments at our special performances, held irregularly with new singers each time.",
         section: "About the Group",
         description: "We're an event group that irregularly puts on wonderful performances, each time with new singers.",
+        rulesTitle: "Community Guidelines",
+        rules: [
+          "Prohibited sexual avatars and related conduct",
+          "No racism, profanity, or derogatory remarks",
+          "No actions that disrupt ongoing world events",
+          "Do not use excessive effects or sound effects"
+        ],
         contactTitle: "Performances & Collaborations",
         contactText: "For performance and collaboration inquiries, please contact us via the Discord group DM!",
         footer: "See you at the next performance."
@@ -161,6 +193,13 @@
         lead: "新しい歌手の皆さんとともに、特別なステージをお届けします。不定期開催のイベントで、毎回新しい歌声と素敵なひとときをお楽しみください。",
         section: "グループ紹介",
         description: "不定期で、毎回新しい歌手の皆さんとともに素敵なパフォーマンスをお届けするイベントグループです。",
+        rulesTitle: "ご利用上の注意",
+        rules: [
+          "性的なアバターおよび関連行為の禁止",
+          "人種差別および暴言・侮辱発言の禁止",
+          "ワールドイベント開催中、イベントを妨害する行為の禁止",
+          "過度なエフェクトや効果音の使用禁止"
+        ],
         contactTitle: "出演・コラボレーションのお問い合わせ",
         contactText: "出演およびコラボレーションのお問い合わせは、DiscordグループのDMまで！",
         footer: "次回の公演でお会いしましょう。"
@@ -172,6 +211,13 @@
         lead: "与全新的歌手相聚于特别的舞台。在不定期举办的演出中，每次都能遇见不同的歌声与精彩瞬间。",
         section: "团体介绍",
         description: "我们是一个不定期举办活动的团体，每次都会与全新的歌手一起为大家带来精彩的演出。",
+        rulesTitle: "活动注意事项",
+        rules: [
+          "禁止使用色情头像及相关行为",
+          "禁止种族歧视、辱骂及贬低他人的言论",
+          "世界活动进行期间，禁止干扰活动的行为",
+          "禁止使用过多的特效和音效"
+        ],
         contactTitle: "演出及合作咨询",
         contactText: "如需咨询演出及合作事宜，请通过 Discord 群组私信联系我们！",
         footer: "期待在下一场演出与您相见。"
@@ -189,6 +235,13 @@
       document.getElementById("lead").textContent = t.lead;
       document.getElementById("about-title").textContent = t.section;
       document.getElementById("description").textContent = t.description;
+      document.getElementById("rules-title").textContent = t.rulesTitle;
+      const rulesList = document.getElementById("rules-list");
+      rulesList.replaceChildren(...t.rules.map(rule => {
+        const item = document.createElement("li");
+        item.textContent = rule;
+        return item;
+      }));
       document.getElementById("contact-title").textContent = t.contactTitle;
       document.getElementById("contact-text").textContent = t.contactText;
       document.getElementById("footer-text").textContent = t.footer;
